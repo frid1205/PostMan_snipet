@@ -1,0 +1,27 @@
+/*
+    CREATE BRANCH WITH UNIQUE ADDRESSLINE1
+    store branch ID to be deleted later in post-request script
+*/
+const createBranch = {
+  url: pm.variables.get("url")+'/branches',
+  method: 'POST',
+  header: {
+    'Authorization': pm.variables.get("token"),
+    'Content-Type': 'application/json'
+  },
+  body: {
+    mode: 'raw',
+    raw: JSON.stringify({
+	    branchName : 'qa search address 1',
+    	address1 : 'addressline1',
+    	postalCode : '1234',
+    	address2 : 'address something',
+    	branchLat : 13,
+    	branchLong : 103
+    })
+  }
+};
+
+pm.sendRequest(createBranch, function (err, resBranch) {
+  pm.environment.set("branch_id_del", resBranch.json().data.branchId);
+});
