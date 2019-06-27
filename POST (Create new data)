@@ -1,9 +1,6 @@
-/*
-    CREATE BRANCH WITH UNIQUE ADDRESSLINE1
-    store branch ID to be deleted later in post-request script
-*/
-const createBranch = {
-  url: pm.variables.get("url")+'/branches',
+/prepare request to create grading with similar name as body
+const createGrading = {
+  url: pm.variables.get("url")+'/_company/gradings',
   method: 'POST',
   header: {
     'Authorization': pm.variables.get("token"),
@@ -12,16 +9,15 @@ const createBranch = {
   body: {
     mode: 'raw',
     raw: JSON.stringify({
-	    branchName : 'qa search address 1',
-    	address1 : 'addressline1',
-    	postalCode : '1234',
-    	address2 : 'address something',
-    	branchLat : 13,
-    	branchLong : 103
+        name: pm.environment.get("lang1")
     })
   }
 };
 
-pm.sendRequest(createBranch, function (err, resBranch) {
-  pm.environment.set("branch_id_del", resBranch.json().data.branchId);
+//send request
+pm.sendRequest(createGrading, function (err, res) {
+    console.log(res.json());
+    pm.environment.set("grading_id_del", res.json().data.id);
 });
+
+console.log("console log pre request script")
