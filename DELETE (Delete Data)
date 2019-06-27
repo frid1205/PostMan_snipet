@@ -1,0 +1,14 @@
+pm.environment.set("branch_id_del", pm.response.json().data[0].branchId);
+
+const delBranch = {
+  url: pm.variables.get("url")+'/branch/'+pm.variables.get("branch_id_del"),
+  method: 'DELETE',
+  header: 'Authorization:'+pm.variables.get("token"),
+  body: {
+    mode: 'raw',
+    raw: JSON.stringify({})
+  }
+};
+
+pm.sendRequest(delBranch, function (err, res) {
+});
