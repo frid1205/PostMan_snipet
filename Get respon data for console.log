@@ -1,0 +1,3 @@
+cara 1 : pm.response.json().data.workflowId;
+
+cara 2 : pm.response.json().data[0].id;
