@@ -1,0 +1,17 @@
+
+const getDepartmentDetail = {
+  url: pm.variables.get("url")+'/_company/department/'+pm.variables.get("department_id"),
+  method: 'GET',
+  header: 'Authorization:'+pm.variables.get("token"),
+  body: {
+    mode: 'raw',
+    raw: JSON.stringify({})
+  }
+};
+
+pm.sendRequest(getDepartmentDetail, function (err, res) {
+  console.log(res.json());
+  pm.test("Updated Correctly", function () {
+        
+    });
+});
