@@ -12,6 +12,6 @@ const getDepartmentDetail = {
 pm.sendRequest(getDepartmentDetail, function (err, res) {
   console.log(res.json());
   pm.test("Updated Correctly", function () {
-        
+        pm.expect(res.text()).to.include("qa department comp2");
     });
 });
